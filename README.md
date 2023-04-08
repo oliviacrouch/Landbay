@@ -20,13 +20,9 @@ In the MortgageMatcher constructor:
 In the matchMortgages method:
 
 4.	This loops around the mortgages objects, one product ID at a time, and matches it with a Funder object from the productIDDesired list with the same productID as the mortgage object – thus is an ‘eligibleFunder’.
-
 5.	The algorithm checks if there are already any eligibleFunders in the list.
-
 6.	If there are, find the Funder with the lowest number of mortgages already associated with it – the lowestNumFunder (based on funderMortgageCount hashmap). This allocates the next mortgage each time to the funder with the least mortgages to ensure an even distribution. 
-
 7.	If there are no eligibleFunders yet, and thus no lowestNumFunder, add the new Funder by codename to the funderMortgageCount and increment its count by one.
-
 8.	Then, add this match to the matchedMortgages hashmap as a successfully matched pair. This matches the mortgage name and the funder’s code name to allow records to distinguish each funder and specific mortgage.
 
 Efficiency: overall - O(n^2)
