@@ -1,15 +1,15 @@
 # Landbay
 Landbay coding challenge for interview 12.4.2023
 
-Setup:
+**Setup:**
 To use this application, download the CSV files ‘mortgages_to_be_funded’ and ‘funder_products_by_funder’ attached in the Landbay repository. The contents of these files should not be altered since both reader classes depend on the structures of the files to read them correctly to objects. Then download the .java files and open in IntelliJ to run. Once downloaded, the pathnames referenced by the reader classes should be changed in accordance with those in your device. Once changed, run the application from the MortgageMatcherMain class in order to view the results of the matching in the terminal. 
 
-Assumptions and understandings:
+**Assumptions and understandings:**
 This simple command line application reads from two CSV files – ‘mortgages_to_be_funded’ (‘mortgage file’ from hereon), and ‘funder_products_by_funder’ (‘funder file’ from hereon). I interpreted the mortgage file to contain a list of mortgages which needed funding, and the funder file to contain a list of funders and their preferences in mortgage type. From examining the ‘products’ CSV file, it was clear that the ‘productID’ is the most important piece of information. The ‘productID’ defines the type of mortgage, by distinguishing the interest rate; the type of rate; and the length of the term of had by mortgages of this particular productID. The funder file indicates which funder has preferences for which productID and thus their preferences for interest rate; type of rate; and the length of the term of the mortgage they are funding. 
 
 With this in mind, I decided to make the ‘productID’ category in both the funder CSV file and the matching factor for funders and available mortgages. This guarantees that no funder is given a mortgage type that they do not want to fund. Also, given that the ‘productID’ is a common variable amongst classes this makes matching easier. 
 
-Fairness algorithm:
+**Fairness algorithm:**
 I thought that implementing a fairness algorithm around the productID was most achievable and most relevant, given that the productID determines the interest rate, interest type and term length. The most important goals were that each funder had been allocated their preferred mortgage type, and that no single funder dominated the market by funding an inordinate number of mortgages. So, I decided to have a counter hash map which would count the number of mortgages which had been allocated to funders and allocate mortgages to the funder with the lowest number of mortgages on each iteration. This was implemented in the ‘MortgageMatcher’ class like so: 
 
 In the MortgageMatcher constructor:
@@ -25,7 +25,7 @@ In the matchMortgages method:
 7.	If there are no eligibleFunders yet, and thus no lowestNumFunder, add the new Funder by codename to the funderMortgageCount and increment its count by one.
 8.	Then, add this match to the matchedMortgages hashmap as a successfully matched pair. This matches the mortgage name and the funder’s code name to allow records to distinguish each funder and specific mortgage.
 
-Efficiency: overall - O(n^2)
+**Efficiency:** overall - O(n^2)
 
 1.	MortgageMatcher class – O(n^2)
 MortgageMatcher constructor: 
@@ -51,7 +51,7 @@ matchMortgages method:
 -	Both Mortgage and Funder classes are O(1) since accessing and setting values of instance variables is a constant operation.
 
 
-Improvements: 
+**Improvements: **
 
 Overall, the program works as I intended it to. It outputs a list of mortgage names paired with funder code names, which have been divided equally between the funders. All have either three or four mortgages assigned to them for funding. the CSV files could be expanded to include more mortgages and funders and would still retain a fairly equal spread of mortgages to funders. 
 Matched Mortgages: 
